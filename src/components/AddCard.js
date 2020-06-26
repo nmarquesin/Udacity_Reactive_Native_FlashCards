@@ -1,24 +1,16 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { getDeck } from "../utils/_DATA";
 import { mint, purple, white } from "../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SelectField from "./SelectField";
-import TextInput from "./TextInput";
 import Button from "./Button";
-
-// function SubmitBtn ({ onPress }) {
-//     return(
-
-//     )
-// }
 
 class AddCard extends Component {
   state = {
-    question: "test",
-    answer: "test",
+    question: "",
+    answer: "",
     test: "test",
-    // type: "",
   };
   updateValue = (value, valueName) => {
     if (this.state.type !== "") {
@@ -30,10 +22,32 @@ class AddCard extends Component {
       });
     }
   };
+  onChangeQuestion = (value) => {
+    if (this.state.type !== "") {
+      this.setState((state) => {
+        return {
+          ...state,
+          question: value,
+        };
+      });
+    }
+  };
+  onChangeAnswer = (value) => {
+    if (this.state.type !== "") {
+      this.setState((state) => {
+        return {
+          ...state,
+          answer: value,
+        };
+      });
+    }
+  };
   handleSaveQuestion = () => {
     const { question, answer } = this.state;
     if (question !== "" && answer !== "") {
       console.log("Question saved.");
+      console.log("New Question =", question);
+      console.log("New Answer =", answer);
       this.setState(() => ({
         question: "",
         answer: "",
@@ -46,19 +60,10 @@ class AddCard extends Component {
 
     // Save to DB
   };
-  //   handleSelectType = (value) => {
-  //     this.setState((state) => {
-  //       return {
-  //         ...state,
-  //         type: value,
-  //       };
-  //     });
-  //   };
   render() {
-    const deck = getDeck("Redux");
-    // console.log("This is the deck: ", deck);
-    const valueq = this.state["question"];
-    const valuea = this.state["answer"];
+    const deck = getDeck("React");
+    const valueq = this.state.question;
+    const valuea = this.state.answer;
     return (
       <View>
         <Text>{deck.title}</Text>
@@ -68,8 +73,10 @@ class AddCard extends Component {
         </Text>
         <Text>Question:</Text>
         <TextInput
-          valueq={valueq}
-          onChange={(valueq) => this.updateValue(valueq, "question")}
+          style={{ backgroundColor: mint }}
+          value={valueq}
+          id="question"
+          onChangeText={(text) => this.onChangeQuestion(text)}
         />
         <Text>Correct Answer:</Text>
         {deck.type === "True or False" ? (
@@ -79,8 +86,10 @@ class AddCard extends Component {
           />
         ) : (
           <TextInput
-            valuea={valuea}
-            onChange={(valuea) => this.updateValue(valuea, "answer")}
+            style={{ backgroundColor: mint }}
+            value={valuea}
+            id="answer"
+            onChangeText={(text) => this.onChangeAnswer(text)}
           />
         )}
         <Button

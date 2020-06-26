@@ -3,13 +3,14 @@ import { View, Text, TextInput } from "react-native";
 import { getDeck } from "../utils/_DATA";
 import { mint, purple, white } from "../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Picker } from "react-native";
 import SelectField from "./SelectField";
 import Button from "./Button";
 
 class AddCard extends Component {
   state = {
     question: "",
-    answer: "",
+    answer: true,
     test: "test",
   };
   updateValue = (value, valueName) => {
@@ -61,7 +62,7 @@ class AddCard extends Component {
     // Save to DB
   };
   render() {
-    const deck = getDeck("React");
+    const deck = getDeck("Redux");
     const valueq = this.state.question;
     const valuea = this.state.answer;
     return (
@@ -80,11 +81,19 @@ class AddCard extends Component {
         />
         <Text>Correct Answer:</Text>
         {deck.type === "True or False" ? (
-          <SelectField
-            valuea={valuea}
-            onChange={(valuea) => this.updateValue(valuea, "answer")}
-          />
+          <Picker
+            selectedValue={this.state.answer}
+            // style={{ height: 50, width: 100 }}
+            onValueChange={(itemValue) => this.setState({ answer: itemValue })}
+          >
+            <Picker.Item label="True" value={true} />
+            <Picker.Item label="False" value={false} />
+          </Picker>
         ) : (
+          // <SelectField
+          //   valuea={valuea}
+          //   onChange={(valuea) => this.updateValue(valuea, "answer")}
+          // />
           <TextInput
             style={{ backgroundColor: mint }}
             value={valuea}
@@ -98,7 +107,6 @@ class AddCard extends Component {
           color={white}
           onPress={this.handleSaveQuestion}
         />
-        <Text>{this.state.test}</Text>
         {/* <Text>
           <MaterialCommunityIcons name="cards" color="purple" size={100} />
         </Text> */}

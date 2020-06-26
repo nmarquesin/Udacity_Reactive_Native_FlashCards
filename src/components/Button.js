@@ -2,7 +2,7 @@ import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 
 const Button = (props) => {
-  const { text, bgcolor, color } = props;
+  const { text, bgcolor, color, onPress } = props;
   return (
     <TouchableOpacity
       style={{
@@ -13,6 +13,7 @@ const Button = (props) => {
         width: 200,
         marginTop: 20,
       }}
+      onPress={onPress}
     >
       <Text
         style={{

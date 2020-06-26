@@ -7,10 +7,17 @@ import SelectField from "./SelectField";
 import TextInput from "./TextInput";
 import Button from "./Button";
 
+// function SubmitBtn ({ onPress }) {
+//     return(
+
+//     )
+// }
+
 class AddCard extends Component {
   state = {
-    question: "",
-    answer: "",
+    question: "test",
+    answer: "test",
+    test: "test",
     // type: "",
   };
   updateValue = (value, valueName) => {
@@ -23,10 +30,21 @@ class AddCard extends Component {
       });
     }
   };
-  handleSaveQuestion = (q, a) => {
-    if (q !== "" && a !== "") {
+  handleSaveQuestion = () => {
+    const { question, answer } = this.state;
+    if (question !== "" && answer !== "") {
       console.log("Question saved.");
+      this.setState(() => ({
+        question: "",
+        answer: "",
+        test: "Here we go, baby",
+      }));
     }
+    // Update Redux
+
+    // Navigate to Home
+
+    // Save to DB
   };
   //   handleSelectType = (value) => {
   //     this.setState((state) => {
@@ -65,7 +83,13 @@ class AddCard extends Component {
             onChange={(valuea) => this.updateValue(valuea, "answer")}
           />
         )}
-        <Button text="Submit" bgcolor={purple} color={white} />
+        <Button
+          text="Submit"
+          bgcolor={purple}
+          color={white}
+          onPress={this.handleSaveQuestion}
+        />
+        <Text>{this.state.test}</Text>
         {/* <Text>
           <MaterialCommunityIcons name="cards" color="purple" size={100} />
         </Text> */}

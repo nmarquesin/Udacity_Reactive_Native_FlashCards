@@ -11,6 +11,7 @@ let decks = {
         answer: "The componentDidMount lifecycle event",
       },
     ],
+    type: "Long anwsers",
   },
   JavaScript: {
     title: "JavaScript",
@@ -21,6 +22,18 @@ let decks = {
           "The combination of a function and the lexical environment within which that function was declared.",
       },
     ],
+    type: "Long anwsers",
+  },
+  Redux: {
+    title: "Redux",
+    questions: [
+      {
+        question:
+          "Is Redux a predictable state container for JavaScript apps.?",
+        answer: true,
+      },
+    ],
+    type: "True or False",
   },
 };
 
@@ -29,8 +42,8 @@ export function getDecks() {
   return decks;
 }
 // getDeck: take in a single id argument and return the deck associated with that id.
-export function getDeck(id) {
-  return decks.id;
+export function getDeck(deck) {
+  return decks[deck];
 }
 // saveDeckTitle: take in a single title argument and add it to the decks.
 // addCardToDeck: take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.

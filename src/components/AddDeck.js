@@ -28,20 +28,18 @@ class AddDeck extends Component {
     const { title, type } = this.state;
     const { navigation } = this.props;
     if (title !== "") {
-      console.log("Deck saved.");
-      console.log("New deck =", title);
-      console.log("Deck type =", type);
-      // Save to DB
       saveDeckTitle(title, type);
-
       this.setState(() => ({
         title: "",
         type: "True or False",
       }));
     }
-    // Update Redux
 
-    navigation.navigate("Decks");
+    let decks;
+    getDecks().then((res) => {
+      decks = JSON.parse(res);
+      navigation.navigate("DeckView", { deck: decks[title] });
+    });
   };
   render() {
     return (
@@ -65,7 +63,7 @@ class AddDeck extends Component {
         </Picker>
 
         <Button
-          text="Submit"
+          text="Create Deck"
           bgcolor={purple}
           color={white}
           onPress={this.handleSaveDeck}

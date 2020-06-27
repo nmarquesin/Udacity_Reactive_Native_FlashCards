@@ -6,25 +6,28 @@ import Button from "./Button";
 
 const DeckView = ({ route, navigation }) => {
   const { deck } = route.params;
-  //   console.log("Logging deck ===> ", deck);
   return (
     <View>
       <View>
-        <Text>DeckName: {deck.title}</Text>
-        <Text>No. of cards: {deck.questions.length}</Text>
+        <Text>Deck: {deck.title}</Text>
+        <Text>Number of cards: {deck.questions.length}</Text>
       </View>
       <View />
       <Button
         text="Add Card"
         bgcolor={peach}
-        onPress={() => navigation.navigate("AddCard")}
+        onPress={() =>
+          navigation.navigate("AddCard", {
+            deck: deck,
+          })
+        }
       />
       <View />
       {deck.questions.length > 0 ? (
         <Button
           text="Start Quiz"
           bgcolor={mint}
-          onPress={() => navigation.navigate("Quiz")}
+          onPress={() => navigation.navigate("Quiz", { deck: deck })}
         />
       ) : (
         <View />

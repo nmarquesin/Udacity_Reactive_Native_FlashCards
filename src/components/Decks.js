@@ -48,7 +48,14 @@ class Decks extends Component {
                 }}
               >
                 <Button
-                  text={this.state.decks[deck].title}
+                  text={
+                    this.state.decks[deck].title +
+                    ` (` +
+                    this.state.decks[deck].questions.length +
+                    (this.state.decks[deck].questions.length === 1
+                      ? ` card)`
+                      : ` cards)`)
+                  }
                   color={mint}
                   bgcolor={purple}
                   onPress={() =>
@@ -57,20 +64,6 @@ class Decks extends Component {
                     })
                   }
                 />
-                {/* <Text
-                style={{
-                  color: mint,
-                }}
-              >
-                {this.state.decks[deck].title}
-              </Text>
-              <Text
-                style={{
-                  color: mint,
-                }}
-              >
-                {this.state.decks[deck].questions.length}
-              </Text> */}
               </View>
             ))
           ) : (

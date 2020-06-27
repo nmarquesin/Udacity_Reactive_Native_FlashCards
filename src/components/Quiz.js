@@ -1,65 +1,127 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
 import Button from "./Button";
 import { mint, peach } from "../utils/colors";
 
 class Quiz extends Component {
   state = {
-    totalCards: 0,
-    currentCard: 0,
-    wrongAnswers: [],
+    currCard: 0,
+    wrongAnswers: 0,
     showAnswer: false,
   };
+
+  handleShowAnswer = () => {
+    const prevState = this.state.showAnswer;
+    this.setState(() => ({
+      showAnswer: !prevState,
+    }));
+  };
+  handleNextQuestion = () => {
+    const lastCard = this.state.currCard;
+    this.setState(() => ({
+      currCard: lastCard + 1,
+      showAnswer: false,
+    }));
+  };
+  saveAnswer = (ans) => {
+    const { route } = this.props;
+    const { deck } = route.params;
+    const lastCard = this.state.currCard;
+    const wrongAns = this.state.wrongAnswers;
+    this.setState(() => ({
+      currCard: lastCard + 1,
+      showAnswer: false,
+      wrongAnswers: wrongAns + ans,
+    }));
+  };
+  resetState = () => {
+    this.setState(() => ({
+      currCard: 0,
+      wrongAnswers: 0,
+      showAnswer: false,
+    }));
+  };
   render() {
-    const { title, questions, type } = this.props;
-    const { totalCards, currentCard, showAnswer } = this.state;
-    return <View>{showAnswer ? <Answer /> : <Question />}</View>;
+    const { navigation, route } = this.props;
+    const { deck } = route.params;
+    const { currCard, showAnswer } = this.state;
+    return (
+      <View>
+        {currCard !== deck.questions.length ? (
+          <View>
+            {showAnswer ? (
+              <View>
+                <Answer
+                  answer={deck.questions[currCard].answer}
+                  cardsLeft={deck.questions.length - (currCard + 1)}
+                />
+                <Button text="Correct" onPress={() => this.saveAnswer(0)} />
+                <Button text="Incorrect" onPress={() => this.saveAnswer(1)} />
+                <Button
+                  text="back to question"
+                  onPress={() => this.handleShowAnswer()}
+                />
+              </View>
+            ) : (
+              <View>
+                <Question
+                  question={deck.questions[currCard].question}
+                  cardsLeft={deck.questions.length - (currCard + 1)}
+                />
+                <Button
+                  text="view answer"
+                  onPress={() => this.handleShowAnswer()}
+                />
+              </View>
+            )}
+          </View>
+        ) : (
+          <View>
+            <Text>End of Quiz</Text>
+            <Text>
+              Score:{" "}
+              {((deck.questions.length - this.state.wrongAnswers) /
+                deck.questions.length) *
+                100}
+            </Text>
+            <Button
+              text="Restart Quiz"
+              onPress={() => {
+                this.resetState();
+              }}
+            />
+            <Button
+              text="Back to Deck"
+              onPress={() => {
+                navigation.navigate("DeckView", { deck: deck });
+              }}
+            />
+          </View>
+        )}
+      </View>
+    );
   }
 }
 
-// const Stack = createStackNavigator({
-//   Answer: {
-//     screen: Answer,
-//   },
-//   Question: {
-//     screen: Question,
-//   },
-// });
-
-const Question = ({ navigation }) => {
-  //   const { question, cards, card, type } = props;
+const Question = (props) => {
+  const { question, cardsLeft } = props;
   return (
     <View style={{ backgroundColor: peach }}>
-      <Text>Question: </Text>
-      {/* <Stack.Navigator>
-        <Stack.Screen name="View Answer" component={Answer} />
-      </Stack.Navigator> */}
-      <Button
-        text="view answer"
-        onPress={() => navigation.navigate("Answer")}
-      />
-      <Text>Cards Left: </Text>
+      <Text>Question: {question}</Text>
+
+      <Text>Cards Left: {cardsLeft}</Text>
     </View>
   );
 };
 
-const Answer = () => {
-  //   const { answer, cards, card, type } = props;
+const Answer = (props) => {
+  const { answer, cardsLeft } = props;
   return (
     <View style={{ backgroundColor: mint }}>
-      <Text>Answer: </Text>
-      <Button text="back" />
-      <Button text="Correct" />
-      <Button text="Incorrect" />
-      <Button text="Next Question" />
-      <Text>Cards Left: </Text>
+      <Text>Answer: {answer}</Text>
+      <Text>Cards Left: {cardsLeft}</Text>
     </View>
   );
-};
-
-const QuizEnd = () => {
-  return <Text>End of Quiz</Text>;
 };
 
 export default Quiz;

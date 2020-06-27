@@ -1,5 +1,4 @@
 import * as React from "react";
-import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -21,18 +20,6 @@ function App() {
         <Stack.Screen name="AddCard" component={AddCard} />
         <Stack.Screen name="DeckView" component={DeckView} />
       </Stack.Navigator>
-      {/* <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      > */}
-      {/* <Quiz /> */}
-      {/* <DeckView /> */}
-      {/* <AddDeck /> */}
-      {/* <AddCard /> */}
-      {/* </View> */}
     </NavigationContainer>
   );
 }

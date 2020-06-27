@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Decks from "./src/components/Decks";
 import AddDeck from "./src/components/AddDeck";
 import AddCard from "./src/components/AddCard";
+import DeckView from "./src/components/DeckView";
 
 class App extends React.Component {
   render() {
@@ -15,7 +16,8 @@ class App extends React.Component {
           alignItems: "center",
         }}
       >
-        <AddDeck />
+        <DeckView />
+        {/* <AddDeck /> */}
         {/* <AddCard /> */}
       </View>
     );

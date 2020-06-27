@@ -45,6 +45,7 @@ class AddCard extends Component {
   };
   handleSaveQuestion = () => {
     const { question, answer } = this.state;
+    const { navigation } = this.props;
     if (question !== "" && answer !== "") {
       console.log("Question saved.");
       console.log("New Question =", question);
@@ -55,11 +56,12 @@ class AddCard extends Component {
         test: "Here we go, baby",
       }));
     }
+    // Save to DB
+
     // Update Redux
 
     // Navigate to Home
-
-    // Save to DB
+    navigation.goBack();
   };
   render() {
     const deck = getDeck("Redux");

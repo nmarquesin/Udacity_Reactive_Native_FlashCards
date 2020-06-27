@@ -26,6 +26,7 @@ class AddDeck extends Component {
 
   handleSaveDeck = () => {
     const { title, type } = this.state;
+    const { navigation } = this.props;
     if (title !== "") {
       console.log("Deck saved.");
       console.log("New deck =", title);
@@ -40,7 +41,7 @@ class AddDeck extends Component {
     }
     // Update Redux
 
-    // Navigate to Home
+    navigation.navigate("Decks");
   };
   render() {
     return (

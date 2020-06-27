@@ -1,6 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import { Text, View } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 import Button from "./Button";
+import { mint, peach } from "../utils/colors";
 
 class Quiz extends Component {
   state = {
@@ -16,27 +18,42 @@ class Quiz extends Component {
   }
 }
 
-const Question = () => {
-  const { question, cards, card, type } = props;
+// const Stack = createStackNavigator({
+//   Answer: {
+//     screen: Answer,
+//   },
+//   Question: {
+//     screen: Question,
+//   },
+// });
+
+const Question = ({ navigation }) => {
+  //   const { question, cards, card, type } = props;
   return (
-    <View>
-      <Text>Question: {question}</Text>
-      <Button text="view answer" />
-      <Text>Cards Left: {cards - card}</Text>
+    <View style={{ backgroundColor: peach }}>
+      <Text>Question: </Text>
+      {/* <Stack.Navigator>
+        <Stack.Screen name="View Answer" component={Answer} />
+      </Stack.Navigator> */}
+      <Button
+        text="view answer"
+        onPress={() => navigation.navigate("Answer")}
+      />
+      <Text>Cards Left: </Text>
     </View>
   );
 };
 
 const Answer = () => {
-  const { answer, cards, card, type } = props;
+  //   const { answer, cards, card, type } = props;
   return (
-    <View>
-      <Text>Answer: {answer}</Text>
+    <View style={{ backgroundColor: mint }}>
+      <Text>Answer: </Text>
       <Button text="back" />
       <Button text="Correct" />
       <Button text="Incorrect" />
       <Button text="Next Question" />
-      <Text>Cards Left: {cards - card}</Text>
+      <Text>Cards Left: </Text>
     </View>
   );
 };

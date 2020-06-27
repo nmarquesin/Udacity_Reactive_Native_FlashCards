@@ -4,7 +4,7 @@ import { getDeck } from "../utils/_DATA";
 import { mint, purple, white } from "../utils/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Picker } from "react-native";
-import SelectField from "./SelectField";
+
 import Button from "./Button";
 
 class AddCard extends Component {

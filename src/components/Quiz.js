@@ -24,9 +24,7 @@ class Quiz extends Component {
       showAnswer: false,
     }));
   };
-  saveAnswer = (ans) => {
-    const { route } = this.props;
-    const { deck } = route.params;
+  handleSaveAnswer = (ans) => {
     const lastCard = this.state.currCard;
     const wrongAns = this.state.wrongAnswers;
     this.setState(() => ({
@@ -41,7 +39,6 @@ class Quiz extends Component {
       wrongAnswers: 0,
       showAnswer: false,
     }));
-    clearLocalNotification().then(setLocalNotification());
   };
   render() {
     const { navigation, route } = this.props;
@@ -61,13 +58,13 @@ class Quiz extends Component {
                   text="Correct"
                   bgcolor={mint}
                   color={brown}
-                  onPress={() => this.saveAnswer(0)}
+                  onPress={() => this.handleSaveAnswer(0)}
                 />
                 <Button
                   text="Incorrect"
                   bgcolor={peach}
                   color={white}
-                  onPress={() => this.saveAnswer(1)}
+                  onPress={() => this.handleSaveAnswer(1)}
                 />
                 <Button
                   text="back to question"
@@ -91,43 +88,48 @@ class Quiz extends Component {
             )}
           </View>
         ) : (
-          <View>
-            <Text style={styles.endOf}>End of Quiz</Text>
-            <Text style={styles.score}>
-              Score:{" "}
-              {Math.round(
-                ((deck.questions.length - this.state.wrongAnswers) /
-                  deck.questions.length) *
-                  100
-              )}
-              %
-            </Text>
-            <Button
-              text="Restart Quiz"
-              color={white}
-              bgcolor={purple}
-              onPress={() => {
-                this.resetState();
-              }}
-            />
-            <Button
-              text="Back to Deck"
-              color={white}
-              bgcolor={purple}
-              onPress={() => {
-                clearLocalNotification().then(setLocalNotification());
-                navigation.navigate("DeckView", { deck: deck });
-              }}
-            />
-          </View>
+          <EndOfQuiz
+            totalQ={deck.questions.length}
+            wrogQ={this.state.wrongAnswers}
+            resetState={this.resetState}
+            navigation={navigation}
+            deck={deck}
+          />
         )}
       </View>
     );
   }
 }
 
-const Question = (props) => {
-  const { question, cardsLeft } = props;
+const EndOfQuiz = ({ totalQ, wrogQ, resetState, navigation, deck }) => {
+  clearLocalNotification().then(setLocalNotification());
+  return (
+    <View>
+      <Text style={styles.endOf}>End of Quiz</Text>
+      <Text style={styles.score}>
+        Score: {Math.round(((totalQ - wrogQ) / totalQ) * 100)}%
+      </Text>
+      <Button
+        text="Restart Quiz"
+        color={white}
+        bgcolor={purple}
+        onPress={() => {
+          resetState();
+        }}
+      />
+      <Button
+        text="Back to Deck"
+        color={white}
+        bgcolor={purple}
+        onPress={() => {
+          navigation.navigate("DeckView", { deck: deck });
+        }}
+      />
+    </View>
+  );
+};
+
+const Question = ({ question, cardsLeft }) => {
   return (
     <View>
       <Text style={styles.cards}>cards left: {cardsLeft}</Text>
@@ -137,8 +139,7 @@ const Question = (props) => {
   );
 };
 
-const Answer = (props) => {
-  const { answer, cardsLeft } = props;
+const Answer = ({ answer, cardsLeft }) => {
   return (
     <View>
       <Text style={styles.cards}>cards left: {cardsLeft}</Text>

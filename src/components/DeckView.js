@@ -1,10 +1,19 @@
 import React, { useRef } from "react";
 import { Text, View, StyleSheet, Animated } from "react-native";
 import { mint, peach, aqua, brown, pink } from "../utils/colors";
+import { getDecks } from "../utils/_DATA";
 import Button from "./Button";
 
 const DeckView = ({ route, navigation }) => {
   const { deck } = route.params;
+  // let currDeck;
+  // const getCurrDecks = () => {
+  //   let decks;
+  //   getDecks().then((res) => {
+  //     decks = JSON.parse(res);
+  //     return decks[deck.title].question.length;
+  //   });
+  // };
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const pos = useRef(new Animated.Value(200)).current;
   const opPos = useRef(new Animated.Value(-200)).current;
@@ -28,16 +37,18 @@ const DeckView = ({ route, navigation }) => {
       speed: 1,
     }).start();
   };
-
+  // let deckSize = getCurrDecks().then((res) => {
+  //   return res;
+  // });
   fadeIn();
   fadeInOp();
+  let deckSize = deck.questions.length;
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.deckName}>{deck.title} Deck</Text>
         <Text style={styles.nCards}>
-          ({deck.questions.length}{" "}
-          {deck.questions.length === 1 ? "card" : "cards"})
+          ({deckSize} {deckSize === 1 ? "card" : "cards"})
         </Text>
       </View>
       <View />
@@ -62,7 +73,7 @@ const DeckView = ({ route, navigation }) => {
         />
       </Animated.View>
       <View />
-      {deck.questions.length > 0 ? (
+      {deckSize > 0 ? (
         <Animated.View
           style={[
             styles.fadingContainer,

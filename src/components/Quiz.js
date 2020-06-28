@@ -104,9 +104,11 @@ class Quiz extends Component {
             <Text style={styles.endOf}>End of Quiz</Text>
             <Text style={styles.score}>
               Score:{" "}
-              {((deck.questions.length - this.state.wrongAnswers) /
-                deck.questions.length) *
-                100}
+              {Math.round(
+                ((deck.questions.length - this.state.wrongAnswers) /
+                  deck.questions.length) *
+                  100
+              )}
               %
             </Text>
             <Button

@@ -28,9 +28,8 @@ let decks = {
     title: "Redux",
     questions: [
       {
-        question:
-          "Is Redux a predictable state container for JavaScript apps.?",
-        answer: true,
+        question: "Is Redux a predictable state container for JavaScript apps?",
+        answer: "Yes",
       },
     ],
   },

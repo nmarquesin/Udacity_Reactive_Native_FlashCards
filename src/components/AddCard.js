@@ -1,22 +1,12 @@
 import React, { Component } from "react";
 import {
-  View,
   Text,
   TextInput,
   StyleSheet,
   KeyboardAvoidingView,
 } from "react-native";
 import { addCardToDeck } from "../utils/_DATA";
-import {
-  mint,
-  peach,
-  pink,
-  aqua,
-  brown,
-  purple,
-  white,
-  oldPink,
-} from "../utils/colors";
+import { pink, aqua, purple, white } from "../utils/colors";
 
 import Button from "./Button";
 
@@ -72,7 +62,7 @@ class AddCard extends Component {
 
       addCardToDeck(card, deckId);
 
-      navigation.goBack();
+      navigation.navigate("Decks");
     }
   };
   render() {

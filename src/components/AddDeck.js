@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, TextInput } from "react-native";
-import { getDeck, saveDeckTitle, getDecks } from "../utils/_DATA";
+import { saveDeckTitle, getDecks } from "../utils/_DATA";
 import { mint, purple, white } from "../utils/colors";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Picker } from "react-native";
-
 import Button from "./Button";
 
 class AddDeck extends Component {
@@ -58,16 +55,12 @@ class AddDeck extends Component {
           id="question"
           onChangeText={(text) => this.onChangeTitle(text)}
         />
-
         <Button
           text="Create Deck"
           bgcolor={purple}
           color={white}
           onPress={this.handleSaveDeck}
         />
-        {/* <Text>
-          <MaterialCommunityIcons name="cards" color="purple" size={100} />
-        </Text> */}
       </View>
     );
   }

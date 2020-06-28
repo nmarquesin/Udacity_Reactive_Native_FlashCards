@@ -1,44 +1,27 @@
-# My Universal React Project
+# React Native Udacity NanoDegree - FlashCards
 
-<p>
-  <!-- iOS -->
-  <a href="https://itunes.apple.com/app/apple-store/id982107779">
-    <img alt="Supports Expo iOS" longdesc="Supports Expo iOS" src="https://img.shields.io/badge/iOS-4630EB.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff" />
-  </a>
-  <!-- Android -->
-  <a href="https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=blankexample">
-    <img alt="Supports Expo Android" longdesc="Supports Expo Android" src="https://img.shields.io/badge/Android-4630EB.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff" />
-  </a>
-  <!-- Web -->
-  <a href="https://docs.expo.io/workflow/web/">
-    <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
-  </a>
-</p>
+This project was developed and tested for iOS devices. It was 100% coded with React Native (JavaScript and CSS) and has no native code.
 
-## 🚀 How to use
+## Install
 
-- Install packages with `yarn` or `npm install`.
-  - If you have native iOS code run `npx pod-install`
-- Run `yarn start` to start the bundler.
-- Open the project in a React runtime to try it:
-  - iOS: [Client iOS](https://itunes.apple.com/app/apple-store/id982107779)
-  - Android: [Client Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=blankexample)
-  - Web: Any web browser
+To run the simulator on your computer you will need XCode installed.
+Install packages with `yarn` or `npm install`.
+Run `yarn ios` to start the bundler.
 
-## Adding Native Code
+## Use
 
-This project can be run from a web browser or the Expo client app. You may find that you want to add more native code later on. You can do this by ejecting the project and rebuilding it yourself.
+The FlashCard app has 5 views: Home, Deck View, New Deck, New Card and Quiz Mode.
 
-- Run `yarn eject` to create the native projects.
-- You can still run your project in the web browser or Expo client, you just won't be able to access any new native modules you add.
+Home - Select a deck of cards to study or create a new deck from scratch.
 
-## Publishing
+Deck View - Start a Quiz or add new cards to a deck
 
-- Deploy the native app to the App store and Play store using this guide: [Deployment](https://docs.expo.io/distribution/app-stores/).
-- Deploy the website using this guide: [Web deployment](https://docs.expo.io/distribution/publishing-websites/).
+New Deck - Create a new deck. Deck names must be unique.
 
-## 📝 Notes
+New Card - Add a new card to an existing deck.
 
-- Learn more about [Universal React](https://docs.expo.io/).
-- See what API and components are [available in the React runtimes](https://docs.expo.io/versions/latest/).
-- Find out more about developing apps and websites: [Guides](https://docs.expo.io/guides/).
+Quiz - Answer all cards in a deck and see your score.
+
+## Contributing
+
+This repo is part of a course project and for that reason I'll most likely not accept and merges/pull requests.

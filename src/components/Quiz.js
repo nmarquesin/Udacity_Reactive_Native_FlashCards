@@ -2,16 +2,7 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import Button from "./Button";
 import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
-import {
-  mint,
-  peach,
-  pink,
-  aqua,
-  brown,
-  purple,
-  white,
-  oldPink,
-} from "../utils/colors";
+import { mint, peach, pink, aqua, brown, purple, white } from "../utils/colors";
 
 class Quiz extends Component {
   state = {

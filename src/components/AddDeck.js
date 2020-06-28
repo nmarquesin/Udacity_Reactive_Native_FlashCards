@@ -10,36 +10,43 @@ import Button from "./Button";
 class AddDeck extends Component {
   state = {
     title: "",
-    type: "True or False",
   };
 
   onChangeTitle = (value) => {
-    if (this.state.type !== "") {
-      this.setState((state) => {
-        return {
-          ...state,
-          title: value,
-        };
-      });
-    }
+    this.setState((state) => {
+      return {
+        ...state,
+        title: value,
+      };
+    });
   };
 
   handleSaveDeck = () => {
-    const { title, type } = this.state;
-    const { navigation } = this.props;
-    if (title !== "") {
-      saveDeckTitle(title, type);
+    const { title } = this.state;
+    const { navigation, route } = this.props;
+    const { decks } = route.params;
+    const existingDecks = Object.keys(decks).map((t) => t.toLowerCase());
+    if (existingDecks.includes(title.toLowerCase())) {
+      alert(
+        "A Deck with this title already exists. Please choose an unique title."
+      );
       this.setState(() => ({
         title: "",
-        type: "True or False",
       }));
+      return;
     }
 
-    let decks;
-    getDecks().then((res) => {
-      decks = JSON.parse(res);
-      navigation.navigate("DeckView", { deck: decks[title] });
-    });
+    if (title !== "") {
+      saveDeckTitle(title);
+      this.setState(() => ({
+        title: "",
+      }));
+      let newDecks;
+      getDecks().then((res) => {
+        newDecks = JSON.parse(res);
+        navigation.navigate("DeckView", { deck: newDecks[title] });
+      });
+    }
   };
   render() {
     return (
@@ -51,16 +58,6 @@ class AddDeck extends Component {
           id="question"
           onChangeText={(text) => this.onChangeTitle(text)}
         />
-        <Text>Quiz type:</Text>
-
-        <Picker
-          style={{ backgroundColor: mint }}
-          selectedValue={this.state.type}
-          onValueChange={(itemValue) => this.setState({ type: itemValue })}
-        >
-          <Picker.Item label="True or False Answers" value={true} />
-          <Picker.Item label="Statement Answers" value={false} />
-        </Picker>
 
         <Button
           text="Create Deck"

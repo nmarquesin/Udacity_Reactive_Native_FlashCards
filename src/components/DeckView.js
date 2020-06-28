@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { mint, peach } from "../utils/colors";
-
 import Button from "./Button";
 
 const DeckView = ({ route, navigation }) => {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
 import Button from "./Button";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 import { mint, peach } from "../utils/colors";
 
 class Quiz extends Component {
@@ -40,6 +41,7 @@ class Quiz extends Component {
       wrongAnswers: 0,
       showAnswer: false,
     }));
+    clearLocalNotification().then(setLocalNotification());
   };
   render() {
     const { navigation, route } = this.props;
@@ -93,6 +95,7 @@ class Quiz extends Component {
             <Button
               text="Back to Deck"
               onPress={() => {
+                clearLocalNotification().then(setLocalNotification());
                 navigation.navigate("DeckView", { deck: deck });
               }}
             />

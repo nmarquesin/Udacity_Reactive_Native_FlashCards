@@ -40,6 +40,7 @@ class Decks extends Component {
           {this.state.decks ? (
             Object.keys(this.state.decks).map((deck) => (
               <View
+                key={this.state.decks[deck].title}
                 style={{
                   borderWidth: "3px",
                   borderStyle: "solid",
@@ -72,7 +73,9 @@ class Decks extends Component {
           <Button
             text="Add Deck"
             bgcolor={mint}
-            onPress={() => navigation.navigate("AddDeck")}
+            onPress={() =>
+              navigation.navigate("AddDeck", { decks: this.state.decks })
+            }
           />
         </ScrollView>
       </View>

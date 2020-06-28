@@ -133,53 +133,6 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
   },
-  qText: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: purple,
-    textAlign: "center",
-    marginBottom: 40,
-  },
-  q: {
-    fontSize: 14,
-    fontStyle: "italic",
-    textAlign: "center",
-    color: pink,
-  },
-  aText: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: aqua,
-    textAlign: "center",
-    marginBottom: 40,
-  },
-  a: {
-    fontSize: 14,
-    fontStyle: "italic",
-    textAlign: "center",
-    color: aqua,
-  },
-  cards: {
-    fontSize: 14,
-    fontStyle: "italic",
-    textAlign: "center",
-    color: pink,
-    marginBottom: 50,
-    marginTop: -50,
-  },
-  score: {
-    fontSize: 40,
-    fontWeight: "bold",
-    color: purple,
-    textAlign: "center",
-    marginBottom: 40,
-  },
-  endOf: {
-    fontSize: 14,
-    fontStyle: "italic",
-    textAlign: "center",
-    color: purple,
-  },
 });
 
 export default AddCard;

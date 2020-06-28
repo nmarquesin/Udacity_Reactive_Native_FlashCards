@@ -30,6 +30,16 @@ const DeckView = ({ navigation, route }) => {
   };
   fadeIn();
   fadeInOp();
+  const tryNavigate = () => {
+    const { deck } = route.params;
+    if (deck.questions.length > 0) {
+      navigation.navigate("Quiz", { deck: deck });
+    } else {
+      alert(
+        "This deck has no question cards yet. Please add a card before starting a Quiz."
+      );
+    }
+  };
   return (
     <View style={styles.container}>
       <View>
@@ -61,26 +71,22 @@ const DeckView = ({ navigation, route }) => {
         />
       </Animated.View>
       <View />
-      {deck.questions.length > 0 ? (
-        <Animated.View
-          style={[
-            styles.fadingContainer,
-            {
-              opacity: fadeAnim,
-              marginLeft: opPos, // Bind opacity to animated value
-            },
-          ]}
-        >
-          <Button
-            text="Start Quiz"
-            bgcolor={aqua}
-            color={brown}
-            onPress={() => navigation.navigate("Quiz", { deck: deck })}
-          />
-        </Animated.View>
-      ) : (
-        <View />
-      )}
+      <Animated.View
+        style={[
+          styles.fadingContainer,
+          {
+            opacity: fadeAnim,
+            marginLeft: opPos,
+          },
+        ]}
+      >
+        <Button
+          text="Start Quiz"
+          bgcolor={aqua}
+          color={brown}
+          onPress={() => tryNavigate()}
+        />
+      </Animated.View>
     </View>
   );
 };

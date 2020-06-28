@@ -14,7 +14,6 @@ const Stack = createStackNavigator();
 class App extends React.Component {
   componentDidMount() {
     setLocalNotification();
-    Permissions.askAsync(Permissions.NOTIFICATIONS);
   }
   render() {
     return (

@@ -44,7 +44,7 @@ export function setLocalNotification() {
                 createNotification(),
                 {
                   time: tomorrow,
-                  repeat: "minute",
+                  repeat: "day",
                 }
               );
 

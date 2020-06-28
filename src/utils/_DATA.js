@@ -65,10 +65,13 @@ export function addCardToDeck(card, deckId) {
       if (decks[key] === deck.title) {
         decks[key] = deck;
       }
-
-      AsyncStorage.removeItem("DECKS").then(() => {
-        AsyncStorage.setItem("DECKS", JSON.stringify(decks));
-      });
     });
+    AsyncStorage.removeItem("DECKS")
+      .then(() => {
+        AsyncStorage.setItem("DECKS", JSON.stringify(decks));
+      })
+      .then(() => {
+        return decks;
+      });
   });
 }

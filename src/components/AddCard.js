@@ -5,14 +5,15 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
 } from "react-native";
-import { addCardToDeck } from "../utils/_DATA";
-import { pink, aqua, purple, white } from "../utils/colors";
+import { addCardToDeck, getDecks } from "../utils/_DATA";
+import { pink, purple, white } from "../utils/colors";
 import Button from "./Button";
 
 class AddCard extends Component {
   state = {
     question: "",
     answer: "",
+    deck: {},
   };
   updateValue = (value, valueName) => {
     if (this.state.type !== "") {
@@ -58,10 +59,19 @@ class AddCard extends Component {
         answer: answer,
       };
       const deckId = deck.title;
-
       addCardToDeck(card, deckId);
-
-      navigation.navigate("Decks");
+      navigation.navigate("DeckView", {
+        deck: {
+          questions: [
+            ...deck.questions,
+            {
+              answer: answer,
+              question: question,
+            },
+          ],
+          title: deck.title,
+        },
+      });
     } else if (question === "") {
       alert("Oops! It looks like you forgot to add a question...");
     } else {

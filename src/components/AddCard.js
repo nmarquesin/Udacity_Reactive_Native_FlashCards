@@ -7,13 +7,12 @@ import {
 } from "react-native";
 import { addCardToDeck } from "../utils/_DATA";
 import { pink, aqua, purple, white } from "../utils/colors";
-
 import Button from "./Button";
 
 class AddCard extends Component {
   state = {
     question: "",
-    answer: true,
+    answer: "",
   };
   updateValue = (value, valueName) => {
     if (this.state.type !== "") {
@@ -63,6 +62,10 @@ class AddCard extends Component {
       addCardToDeck(card, deckId);
 
       navigation.navigate("Decks");
+    } else if (question === "") {
+      alert("Oops! It looks like you forgot to add a question...");
+    } else {
+      alert("Oops! It looks like you forgot to add an answer...");
     }
   };
   render() {
@@ -86,7 +89,6 @@ class AddCard extends Component {
           onChangeText={(text) => this.onChangeQuestion(text)}
         />
         <Text>Answer:</Text>
-
         <TextInput
           placeholder="Enter answer"
           style={styles.input}
@@ -94,7 +96,6 @@ class AddCard extends Component {
           id="answer"
           onChangeText={(text) => this.onChangeAnswer(text)}
         />
-
         <Button
           text="Submit"
           bgcolor={purple}

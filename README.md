@@ -5,7 +5,7 @@ This project was developed and tested for iOS devices. It was 100% coded with Re
 ## Install
 
 To run the simulator on your computer you will need XCode installed.
-Install packages with `yarn` or `npm install`.
+Install packages with `yarn install` or `npm install`.
 Run `yarn ios` to start the bundler.
 
 ## Use

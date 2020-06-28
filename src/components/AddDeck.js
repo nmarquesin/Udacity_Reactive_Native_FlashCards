@@ -1,7 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, TextInput } from "react-native";
+import {
+  Text,
+  TextInput,
+  StyleSheet,
+  KeyboardAvoidingView,
+} from "react-native";
 import { saveDeckTitle, getDecks } from "../utils/_DATA";
-import { mint, purple, white } from "../utils/colors";
+import { purple, white } from "../utils/colors";
 import Button from "./Button";
 
 class AddDeck extends Component {
@@ -47,10 +52,11 @@ class AddDeck extends Component {
   };
   render() {
     return (
-      <View>
-        <Text>Deck title:</Text>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <Text style={styles.q}>Deck title:</Text>
         <TextInput
-          style={{ backgroundColor: mint }}
+          placeholder="Enter a unique deck title"
+          style={styles.input}
           value={this.state.title}
           id="question"
           onChangeText={(text) => this.onChangeTitle(text)}
@@ -61,9 +67,28 @@ class AddDeck extends Component {
           color={white}
           onPress={this.handleSaveDeck}
         />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  input: {
+    width: 300,
+    backgroundColor: white,
+    padding: 10,
+    margin: 10,
+  },
+  q: {
+    fontSize: 16,
+    textAlign: "center",
+    color: purple,
+  },
+});
 
 export default AddDeck;

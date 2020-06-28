@@ -20,6 +20,7 @@ const Button = (props) => {
           color: color,
           textAlign: "center",
           textTransform: "uppercase",
+          fontWeight: "bold",
         }}
       >
         {text}

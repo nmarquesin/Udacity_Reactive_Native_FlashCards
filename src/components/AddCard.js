@@ -1,7 +1,22 @@
 import React, { Component } from "react";
-import { View, Text, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  KeyboardAvoidingView,
+} from "react-native";
 import { addCardToDeck } from "../utils/_DATA";
-import { mint, purple, white } from "../utils/colors";
+import {
+  mint,
+  peach,
+  pink,
+  aqua,
+  brown,
+  purple,
+  white,
+  oldPink,
+} from "../utils/colors";
 
 import Button from "./Button";
 
@@ -48,19 +63,17 @@ class AddCard extends Component {
       this.setState(() => ({
         question: "",
         answer: "",
-        test: "Here we go, baby",
       }));
+      const card = {
+        question: question,
+        answer: answer,
+      };
+      const deckId = deck.title;
+
+      addCardToDeck(card, deckId);
+
+      navigation.goBack();
     }
-
-    const card = {
-      question: question,
-      answer: answer,
-    };
-    const deckId = deck.title;
-
-    addCardToDeck(card, deckId);
-
-    navigation.goBack();
   };
   render() {
     const { route } = this.props;
@@ -68,15 +81,16 @@ class AddCard extends Component {
     const valueq = this.state.question;
     const valuea = this.state.answer;
     return (
-      <View>
-        <Text>{deck.title} deck</Text>
-        <Text key={deck.title + "s"}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <Text style={styles.deckName}>{deck.title} deck</Text>
+        <Text key={deck.title + "s"} style={styles.nCards}>
           ({deck.questions.length}{" "}
           {deck.questions.length !== 1 ? "cards" : "card"})
         </Text>
         <Text>Question:</Text>
         <TextInput
-          style={{ backgroundColor: mint }}
+          placeholder="Enter question"
+          style={styles.input}
           value={valueq}
           id="question"
           onChangeText={(text) => this.onChangeQuestion(text)}
@@ -84,7 +98,8 @@ class AddCard extends Component {
         <Text>Answer:</Text>
 
         <TextInput
-          style={{ backgroundColor: mint }}
+          placeholder="Enter answer"
+          style={styles.input}
           value={valuea}
           id="answer"
           onChangeText={(text) => this.onChangeAnswer(text)}
@@ -96,9 +111,84 @@ class AddCard extends Component {
           color={white}
           onPress={this.handleSaveQuestion}
         />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  deckName: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: purple,
+    textAlign: "center",
+    margin: 10,
+  },
+  nCards: {
+    fontSize: 14,
+    fontStyle: "italic",
+    textAlign: "center",
+    marginBottom: 20,
+    color: pink,
+  },
+  input: {
+    width: 300,
+    backgroundColor: white,
+    padding: 10,
+    margin: 10,
+  },
+  qText: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: purple,
+    textAlign: "center",
+    marginBottom: 40,
+  },
+  q: {
+    fontSize: 14,
+    fontStyle: "italic",
+    textAlign: "center",
+    color: pink,
+  },
+  aText: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: aqua,
+    textAlign: "center",
+    marginBottom: 40,
+  },
+  a: {
+    fontSize: 14,
+    fontStyle: "italic",
+    textAlign: "center",
+    color: aqua,
+  },
+  cards: {
+    fontSize: 14,
+    fontStyle: "italic",
+    textAlign: "center",
+    color: pink,
+    marginBottom: 50,
+    marginTop: -50,
+  },
+  score: {
+    fontSize: 40,
+    fontWeight: "bold",
+    color: purple,
+    textAlign: "center",
+    marginBottom: 40,
+  },
+  endOf: {
+    fontSize: 14,
+    fontStyle: "italic",
+    textAlign: "center",
+    color: purple,
+  },
+});
 
 export default AddCard;

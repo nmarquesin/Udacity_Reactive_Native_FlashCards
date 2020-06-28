@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Text, View, StyleSheet, Animated } from "react-native";
-import { mint, peach } from "../utils/colors";
+import { mint, peach, aqua, brown, pink } from "../utils/colors";
 import Button from "./Button";
 
 const DeckView = ({ route, navigation }) => {
@@ -32,12 +32,13 @@ const DeckView = ({ route, navigation }) => {
   fadeIn();
   fadeInOp();
   return (
-    <View
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+    <View style={styles.container}>
       <View>
-        <Text>Deck: {deck.title}</Text>
-        <Text>Number of cards: {deck.questions.length}</Text>
+        <Text style={styles.deckName}>{deck.title} Deck</Text>
+        <Text style={styles.nCards}>
+          ({deck.questions.length}{" "}
+          {deck.questions.length === 1 ? "card" : "cards"})
+        </Text>
       </View>
       <View />
       <Animated.View
@@ -45,13 +46,14 @@ const DeckView = ({ route, navigation }) => {
           styles.fadingContainer,
           {
             opacity: fadeAnim,
-            marginLeft: pos, // Bind opacity to animated value
+            marginLeft: pos,
           },
         ]}
       >
         <Button
           text="Add Card"
-          bgcolor={peach}
+          bgcolor={mint}
+          color={brown}
           onPress={() =>
             navigation.navigate("AddCard", {
               deck: deck,
@@ -72,7 +74,8 @@ const DeckView = ({ route, navigation }) => {
         >
           <Button
             text="Start Quiz"
-            bgcolor={mint}
+            bgcolor={aqua}
+            color={brown}
             onPress={() => navigation.navigate("Quiz", { deck: deck })}
           />
         </Animated.View>
@@ -90,17 +93,20 @@ const styles = StyleSheet.create({
   },
   fadingContainer: {
     paddingVertical: 8,
-    // paddingHorizontal: 16,
-    // marginLeft: 20,
   },
-  fadingText: {
+  deckName: {
     fontSize: 28,
+    fontWeight: "bold",
+    color: peach,
     textAlign: "center",
     margin: 10,
   },
-  buttonRow: {
-    flexDirection: "row",
-    marginVertical: 16,
+  nCards: {
+    fontSize: 14,
+    fontStyle: "italic",
+    textAlign: "center",
+    marginBottom: 20,
+    color: pink,
   },
 });
 

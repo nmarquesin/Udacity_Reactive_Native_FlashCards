@@ -26,28 +26,18 @@ class Decks extends Component {
       <View
         style={{
           flex: 1,
-          // justifyContent: "center",
-          // alignItems: "center",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <ScrollView
           style={{
             flex: 1,
-            // justifyContent: "center",
-            // alignItems: "center",
           }}
         >
           {this.state.decks ? (
             Object.keys(this.state.decks).map((deck) => (
-              <View
-                key={this.state.decks[deck].title}
-                style={{
-                  borderWidth: "3px",
-                  borderStyle: "solid",
-                  borderColor: mint,
-                  // backgroundColor: purple,
-                }}
-              >
+              <View key={this.state.decks[deck].title}>
                 <Button
                   text={
                     this.state.decks[deck].title +

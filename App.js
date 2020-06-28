@@ -22,11 +22,27 @@ class App extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Decks">
-          <Stack.Screen name="Decks" component={Decks} />
+          <Stack.Screen
+            name="Decks"
+            component={Decks}
+            options={{ title: "Home" }}
+          />
           <Stack.Screen name="Quiz" component={Quiz} />
-          <Stack.Screen name="AddDeck" component={AddDeck} />
-          <Stack.Screen name="AddCard" component={AddCard} />
-          <Stack.Screen name="DeckView" component={DeckView} />
+          <Stack.Screen
+            name="AddDeck"
+            component={AddDeck}
+            options={{ title: "Create a New Deck" }}
+          />
+          <Stack.Screen
+            name="AddCard"
+            component={AddCard}
+            options={{ title: "Add a new card" }}
+          />
+          <Stack.Screen
+            name="DeckView"
+            component={DeckView}
+            options={{ title: "Deck View" }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );

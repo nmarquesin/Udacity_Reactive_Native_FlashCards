@@ -49,42 +49,18 @@ class Quiz extends Component {
         {currCard !== deck.questions.length ? (
           <View>
             {showAnswer ? (
-              <View style={styles.container}>
-                <Answer
-                  answer={deck.questions[currCard].answer}
-                  cardsLeft={deck.questions.length - (currCard + 1)}
-                />
-                <Button
-                  text="Correct"
-                  bgcolor={mint}
-                  color={brown}
-                  onPress={() => this.handleSaveAnswer(0)}
-                />
-                <Button
-                  text="Incorrect"
-                  bgcolor={peach}
-                  color={white}
-                  onPress={() => this.handleSaveAnswer(1)}
-                />
-                <Button
-                  text="back to question"
-                  color={brown}
-                  onPress={() => this.handleShowAnswer()}
-                />
-              </View>
+              <Answer
+                answer={deck.questions[currCard].answer}
+                cardsLeft={deck.questions.length - (currCard + 1)}
+                saveAnswer={this.handleSaveAnswer}
+                showAnswer={this.handleShowAnswer}
+              />
             ) : (
-              <View style={styles.container}>
-                <Question
-                  question={deck.questions[currCard].question}
-                  cardsLeft={deck.questions.length - (currCard + 1)}
-                />
-                <Button
-                  text="view answer"
-                  bgcolor={pink}
-                  color={white}
-                  onPress={() => this.handleShowAnswer()}
-                />
-              </View>
+              <Question
+                question={deck.questions[currCard].question}
+                cardsLeft={deck.questions.length - (currCard + 1)}
+                showAnswer={this.handleShowAnswer}
+              />
             )}
           </View>
         ) : (
@@ -129,22 +105,45 @@ const EndOfQuiz = ({ totalQ, wrogQ, resetState, navigation, deck }) => {
   );
 };
 
-const Question = ({ question, cardsLeft }) => {
+const Question = ({ question, cardsLeft, showAnswer }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.cards}>cards left: {cardsLeft}</Text>
       <Text style={styles.q}>question</Text>
       <Text style={styles.qText}>{question}</Text>
+      <Button
+        text="view answer"
+        bgcolor={pink}
+        color={white}
+        onPress={() => showAnswer()}
+      />
     </View>
   );
 };
 
-const Answer = ({ answer, cardsLeft }) => {
+const Answer = ({ answer, cardsLeft, saveAnswer, showAnswer }) => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.cards}>cards left: {cardsLeft}</Text>
       <Text style={styles.a}>answer</Text>
       <Text style={styles.aText}>{answer}</Text>
+      <Button
+        text="Correct"
+        bgcolor={mint}
+        color={brown}
+        onPress={() => saveAnswer(0)}
+      />
+      <Button
+        text="Incorrect"
+        bgcolor={peach}
+        color={white}
+        onPress={() => saveAnswer(1)}
+      />
+      <Button
+        text="back to question"
+        color={brown}
+        onPress={() => showAnswer()}
+      />
     </View>
   );
 };

@@ -48,6 +48,8 @@ class AddDeck extends Component {
         newDecks = JSON.parse(res);
         navigation.navigate("DeckView", { deck: newDecks[title] });
       });
+    } else {
+      alert("Oops! It looks like your forgot to add a title...");
     }
   };
   render() {

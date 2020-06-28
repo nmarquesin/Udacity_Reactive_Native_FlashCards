@@ -80,7 +80,7 @@ class Quiz extends Component {
 const EndOfQuiz = ({ totalQ, wrogQ, resetState, navigation, deck }) => {
   clearLocalNotification().then(setLocalNotification());
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.endOf}>End of Quiz</Text>
       <Text style={styles.score}>
         Score: {Math.round(((totalQ - wrogQ) / totalQ) * 100)}%
